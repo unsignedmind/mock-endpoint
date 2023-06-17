@@ -3,9 +3,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const crypto = require('crypto');
+var cors = require('cors')
 
 var app = express();
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -240,7 +242,7 @@ app.get('/blueprint/servlet/service/data/:componentname/:contentId/:contextId', 
     const { componentname, contentId, contextId } = req.params;
     const productId = req.query.productId;
 
-
+    console.log(contentId, req.url)
     res.send({ ...jdOffer, modalTitle: `${jdOffer.modalTitle} | ContentId: ${contentId}` });
 });
 
